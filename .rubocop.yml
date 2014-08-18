@@ -1,0 +1,42 @@
+AllCops:
+  Include:
+    - '**/*.gemspec'
+    - '**/Rakefile'
+  Exclude:
+    - 'vendor/**/*'
+    - db/**/*
+    - config/**/*
+    - script/**/*
+    - bin/**/*
+    - !ruby/regexp /old_and_unused\.rb$/
+  RunRailsCops: true
+
+Documentation:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
+
+LineLength:
+  Max: 120
+
+MethodLength:
+  Max: 15
+
+SignalException:
+  EnforcedStyle: only_raise
+
+AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+DotPosition:
+  EnforcedStyle: trailing
+
+SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+ClassAndModuleChildren:
+  Enabled: false
+
+EmptyLinesAroundBody:
+  Enabled: false
