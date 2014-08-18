@@ -1,6 +1,8 @@
 # MediaRenamer
 
-TODO: Write a gem description
+[![Code Climate](https://codeclimate.com/github/lluzak/media_renamer/badges/gpa.svg)](https://codeclimate.com/github/lluzak/media_renamer)
+[![Build Status](https://travis-ci.org/lluzak/media_renamer.png?branch=master)](https://travis-ci.org/lluzak/media_renamer)
+[![Test Coverage](https://codeclimate.com/github/lluzak/media_renamer/badges/coverage.svg)](https://codeclimate.com/github/lluzak/media_renamer)
 
 ## Installation
 
