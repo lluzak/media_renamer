@@ -1,6 +1,8 @@
 require 'media_renamer/version'
 
+require 'media_renamer/errors'
 require 'media_renamer/matcher'
+require 'media_renamer/media_namer'
 
 require 'media_renamer/library_naming'
 require 'media_renamer/library_naming/movie'
