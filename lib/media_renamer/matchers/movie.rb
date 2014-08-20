@@ -18,7 +18,8 @@ module MediaRenamer::Matchers
     def build_metadata(result)
       {
         title:        titleize(result['title']),
-        release_year: result['year']
+        release_year: result['year'],
+        extension:    result['extension']
       }
     end
 

@@ -11,7 +11,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Brick Mansions',
-          release_year: '2014'
+          release_year: '2014',
+          extension:    'mp4'
         )
       end
 
@@ -20,7 +21,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'X-Men Days of Future Past',
-          release_year: '2014'
+          release_year: '2014',
+          extension:    'mkv'
         )
       end
 
@@ -29,7 +31,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Goal of the Dead',
-          release_year: '2014'
+          release_year: '2014',
+          extension:    'mp4'
         )
       end
 
@@ -38,7 +41,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Maleficent',
-          release_year: '2014'
+          release_year: '2014',
+          extension:    'avi'
         )
       end
 
@@ -47,7 +51,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Godzilla',
-          release_year: '2012'
+          release_year: '2012',
+          extension:    'avi'
         )
       end
 
@@ -56,7 +61,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Captain America The Winter Soldier',
-          release_year: '2014'
+          release_year: '2014',
+          extension:    'mp4'
         )
       end
 
@@ -65,7 +71,8 @@ describe MediaRenamer::Matchers::Movie do
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Saving Private Ryan',
-          release_year: '1998'
+          release_year: '1998',
+          extension:    'mp4'
         )
       end
     end
