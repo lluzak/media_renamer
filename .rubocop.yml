@@ -9,9 +9,12 @@ AllCops:
     - script/**/*
     - bin/**/*
     - !ruby/regexp /old_and_unused\.rb$/
-  RunRailsCops: true
+  RunRailsCops: false
 
 Documentation:
+  Enabled: false
+
+FormatString:
   Enabled: false
 
 StringLiterals:
