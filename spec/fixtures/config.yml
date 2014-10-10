@@ -1,0 +1,6 @@
+library:
+  base_path: '/example/path/to/the/main/library/directory'
+  directory_names:
+    anime: 'Animes'
+    tv_show: 'TV Show'
+    movie: 'Movies'
