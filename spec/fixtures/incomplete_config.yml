@@ -1,7 +1,6 @@
-watch_directory: 'example/path/to/the/main/download/directory'
 library:
   base_path: '/example/path/to/the/main/library/directory'
   directory_names:
     anime: 'Animes'
-    tv_show: 'TV Shows'
+    tv_show: 'TV Show'
     movie: 'Movies'
