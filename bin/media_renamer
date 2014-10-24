@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'media_renamer'
+
+MediaRenamer::CLI.new(ARGV).run
