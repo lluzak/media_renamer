@@ -6,6 +6,8 @@ require 'media_renamer/media_namer'
 require 'media_renamer/file_mover'
 require 'media_renamer/cli'
 require 'media_renamer/configuration'
+require 'media_renamer/logger'
+require 'media_renamer/watcher'
 
 require 'media_renamer/library_naming'
 require 'media_renamer/library_naming/movie'
