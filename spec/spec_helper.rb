@@ -1,3 +1,5 @@
+ENV['MEDIA_ENV'] = "test"
+
 require 'bundler/setup'
 
 Bundler.setup

@@ -43,8 +43,19 @@ describe MediaRenamer::MediaNamer do
           and_return(storing_data)
       end
 
-      it 'returns storing information for filepath' do
-        expect(subject.run).to eq(storing_data)
+      describe '#media_type' do
+        it 'returns media type of file' do
+          subject.run
+          expect(subject.media_type).to eq(:movie)
+        end
+      end
+
+      describe '#store_path' do
+        it 'returns media type of file' do
+          subject.run
+          filepath = File.join(storing_data[:path], storing_data[:filename])
+          expect(subject.store_path).to eq(filepath)
+        end
       end
     end
 
