@@ -8,7 +8,7 @@ module MediaRenamer
       @logger           = ::Logger.new(STDOUT)
       @logger.formatter = proc do |severity, time, name, message|
         formatted_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        "#{formatted_time}: #{message}\n"
+        "#{severity.upcase} #{formatted_time}: #{message}\n"
       end
 
       if ENV['MEDIA_ENV'] == 'test'
