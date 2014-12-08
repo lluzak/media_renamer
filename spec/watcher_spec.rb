@@ -59,17 +59,32 @@ describe MediaRenamer::Watcher do
             with('new_file.mp4').
             and_return(namer)
 
-          expect(namer).to receive(:run)
-
           expect(MediaRenamer::FileMover).to receive(:new).
             with(source, destination).
             and_return(mover)
 
-          expect(mover).to receive(:move_file)
+          expect(namer).to receive(:run)
         end
 
-        it 'runs namer on filename and move file to proper directory' do
-          subject.begin
+        describe 'when file has been moved by third party program' do
+          before do
+            expect(mover).to receive(:move_file).
+              and_raise(MediaRenamer::SourceNotExistError)
+          end
+
+          it 'writes into log information about missing file and continues' do
+            subject.begin
+          end
+        end
+
+        describe 'when file and destination directory exist' do
+          before do
+            expect(mover).to receive(:move_file)
+          end
+
+          it 'runs namer on filename and moves file to proper directory' do
+            subject.begin
+          end
         end
       end
     end

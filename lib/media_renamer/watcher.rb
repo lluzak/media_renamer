@@ -19,6 +19,8 @@ module MediaRenamer
           move_file_to_library(event.name, namer)
         rescue UnknownMediaTypeError
           logger.warn("#{event.name}: Unable to determine media type of the file")
+        rescue SourceNotExistError
+          logger.warn("#{event.name}: File no longer exist in watch directory")
         end
       end
 
