@@ -12,21 +12,69 @@ describe MediaRenamer::Watcher do
   subject { described_class.new(configuration, notifier) }
 
   describe '#begin' do
-    describe 'when event come about moving or changing a file' do
+    describe 'when files exists in directory' do
+      before do
+        expect(notifier).to receive(:watch).
+          with('example/path/to/the/main/download/directory', :recursive, :moved_to, :create)
 
+        expect(notifier).to receive(:run)
+
+        expect(Dir).to receive(:[]).
+          and_return(["filename.mp4", "filename2.avi"])
+      end
+
+      it 'runs detection on files in directory' do
+        subject.begin
+      end
+    end
+
+    describe 'when event come about new directory' do
       let(:event) do
         double(INotify::Event,
-          name:          'new_file.mp4',
-          absolute_name: 'example/path/to/the/main/download/directory/new_file.mp4'
+          name:          'testing',
+          absolute_name: 'example/path/to/the/main/download/directory/testing'
         )
       end
 
       before do
         expect(notifier).to receive(:watch).
-          with('example/path/to/the/main/download/directory', :moved_to, :create).
+          with('example/path/to/the/main/download/directory', :recursive, :moved_to, :create).
           and_yield(event)
 
         expect(notifier).to receive(:run)
+
+        expect(MediaRenamer::MediaNamer).to_not receive(:new)
+
+        expect(File).to receive(:file?).
+          with('example/path/to/the/main/download/directory/testing')
+          .and_return(false)
+      end
+
+      it 'skips if event consider directory' do
+        subject.begin
+      end
+    end
+
+    describe 'when event come about moving or changing a file' do
+      let(:event_absolute_name) { 'example/path/to/the/main/download/directory/testing/new_file.mp4' }
+
+      let(:event) do
+        double(INotify::Event,
+          name:          'testing/new_file.mp4',
+          absolute_name: event_absolute_name
+        )
+      end
+
+      before do
+        expect(notifier).to receive(:watch).
+          with('example/path/to/the/main/download/directory', :recursive, :moved_to, :create).
+          and_yield(event)
+
+        expect(notifier).to receive(:run)
+
+        expect(File).to receive(:file?).
+          with(event_absolute_name).
+          and_return(true)
       end
 
       describe 'when file media type not recognized' do
@@ -51,7 +99,7 @@ describe MediaRenamer::Watcher do
         let(:store_path)  { "formatted_file_name.mp4" }
         let(:mover)       { double(MediaRenamer::FileMover) }
         let(:namer)       { double(MediaRenamer::MediaNamer, store_path: store_path, media_type: :movie) }
-        let(:source)      { 'example/path/to/the/main/download/directory/new_file.mp4' }
+        let(:source)      { event_absolute_name }
         let(:destination) { File.join(configuration.library_movie_directory, store_path) }
 
         before do

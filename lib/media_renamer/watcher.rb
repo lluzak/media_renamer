@@ -5,29 +5,52 @@ require 'rb-inotify'
 module MediaRenamer
   class Watcher
     def initialize(configuration, notifier = INotify::Notifier.new)
-      @configuration = configuration
-      @notifier      = notifier
+      @configuration   = configuration
+      @notifier        = notifier
     end
 
     def begin
-      @notifier.watch(@configuration.watch_directory, :moved_to, :create) do |event|
-        begin
-          namer = MediaNamer.new(event.name)
-          namer.run
-
-          logger.info("#{event.name}: File detected as #{media_type_name(namer.media_type)}")
-          move_file_to_library(event.name, namer)
-        rescue UnknownMediaTypeError
-          logger.warn("#{event.name}: Unable to determine media type of the file")
-        rescue SourceNotExistError
-          logger.warn("#{event.name}: File no longer exist in watch directory")
-        end
+      @notifier.watch(@configuration.watch_directory, :recursive, :moved_to, :create) do |event|
+        detect_and_move_file(event.name) if File.file?(event.absolute_name)
       end
 
+      logger.info("Starting watching directory...")
+      check_existing_files
       @notifier.run
     end
 
     private
+
+    def check_existing_files
+      files_in_watching_directory.each do |file|
+        detect_and_move_file(file)
+      end
+    end
+
+    def files_in_watching_directory
+      watch_directory_path = Pathname.new(@configuration.watch_directory)
+      file_pattern         = File.join(@configuration.watch_directory, "**/*.*")
+
+      Dir[file_pattern].map do |file|
+        Pathname.new(file).relative_path_from(watch_directory_path).to_s
+      end
+    end
+
+    def detect_and_move_file(filepath)
+      filename = File.basename(filepath)
+
+      begin
+        namer = MediaNamer.new(filename)
+        namer.run
+
+        logger.info("#{filename}: File detected as #{media_type_name(namer.media_type)}")
+        move_file_to_library(filepath, namer)
+      rescue UnknownMediaTypeError
+        logger.warn("#{filename}: Unable to determine media type of the file")
+      rescue SourceNotExistError
+        logger.warn("#{filename}: File no longer exist in watch directory")
+      end
+    end
 
     def logger
       @logger ||= MediaRenamer::Logger.new.logger
