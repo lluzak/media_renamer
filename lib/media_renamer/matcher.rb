@@ -20,6 +20,5 @@ module MediaRenamer
 
       nil
     end
-
   end
 end

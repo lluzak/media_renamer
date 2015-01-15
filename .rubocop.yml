@@ -41,5 +41,8 @@ SpaceInsideHashLiteralBraces:
 ClassAndModuleChildren:
   Enabled: false
 
-EmptyLinesAroundBody:
+EmptyLinesAroundClassBody:
+  Enabled: false
+
+EmptyLinesAroundBlockBody:
   Enabled: false

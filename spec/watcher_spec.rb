@@ -46,8 +46,8 @@ describe MediaRenamer::Watcher do
         expect(MediaRenamer::MediaNamer).to_not receive(:new)
 
         expect(File).to receive(:file?).
-          with('example/path/to/the/main/download/directory/testing')
-          .and_return(false)
+          with('example/path/to/the/main/download/directory/testing').
+          and_return(false)
       end
 
       it 'skips if event consider directory' do
@@ -59,10 +59,7 @@ describe MediaRenamer::Watcher do
       let(:event_absolute_name) { 'example/path/to/the/main/download/directory/testing/new_file.mp4' }
 
       let(:event) do
-        double(INotify::Event,
-          name:          'testing/new_file.mp4',
-          absolute_name: event_absolute_name
-        )
+        double(INotify::Event, name: 'testing/new_file.mp4', absolute_name: event_absolute_name)
       end
 
       before do

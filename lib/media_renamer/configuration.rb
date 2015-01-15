@@ -53,11 +53,9 @@ class MediaRenamer::Configuration
   end
 
   def parse_yaml_string(content)
-    begin
-      YAML.load(content)
-    rescue Psych::SyntaxError, StandardError
-      raise MediaRenamer::ConfigFileError,
-        "Configuration file #{@config_path} contains malformed content"
-    end
+    YAML.load(content)
+  rescue Psych::SyntaxError, StandardError
+    raise MediaRenamer::ConfigFileError,
+      "Configuration file #{@config_path} contains malformed content"
   end
 end
