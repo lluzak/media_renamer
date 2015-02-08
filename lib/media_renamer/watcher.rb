@@ -10,6 +10,7 @@ module MediaRenamer
     end
 
     def begin
+      create_watch_directory unless Dir.exist?(@configuration.watch_directory)
       @notifier.watch(@configuration.watch_directory, :recursive, :moved_to, :create) do |event|
         detect_and_move_file(event.name) if File.file?(event.absolute_name)
       end
@@ -20,6 +21,10 @@ module MediaRenamer
     end
 
     private
+
+    def create_watch_directory
+      FileUtils.mkdir_p @configuration.watch_directory
+    end
 
     def check_existing_files
       files_in_watching_directory.each do |file|

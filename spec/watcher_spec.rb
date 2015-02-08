@@ -12,6 +12,7 @@ describe MediaRenamer::Watcher do
   subject { described_class.new(configuration, notifier) }
 
   describe '#begin' do
+
     describe 'when files exists in directory' do
       before do
         expect(notifier).to receive(:watch).
@@ -23,17 +24,27 @@ describe MediaRenamer::Watcher do
           and_return(["filename.mp4", "filename2.avi"])
       end
 
+
       it 'runs detection on files in directory' do
         subject.begin
+      end
+
+      describe "when watch directory doesn't exist" do
+        it 'creates watch directory' do
+          expect(Dir).to receive(:exist?).and_return(false)
+          expect(FileUtils).to receive(:mkdir_p).with(configuration.watch_directory)
+
+          subject.begin
+        end
       end
     end
 
     describe 'when event come about new directory' do
       let(:event) do
         double(INotify::Event,
-          name:          'testing',
-          absolute_name: 'example/path/to/the/main/download/directory/testing'
-        )
+               name:          'testing',
+               absolute_name: 'example/path/to/the/main/download/directory/testing'
+              )
       end
 
       before do
