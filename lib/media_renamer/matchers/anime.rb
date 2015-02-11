@@ -2,7 +2,7 @@ module MediaRenamer::Matchers
   class Anime
     FILENAME_REGEX = /
       \[(?<translation_group>[A-z0-9-]+)\]\s
-      (?<title>[\s\w\:\+]+)
+      (?<title>[-\s\w\:\+]+)
       \s-\s(?<episode>[0-9]{0,3})
       .+
       (?<=\.)(?<extension>[A-z0-9]{2,3})
@@ -23,6 +23,5 @@ module MediaRenamer::Matchers
         extension:         result['extension']
       }
     end
-
   end
 end

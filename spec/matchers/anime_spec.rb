@@ -59,6 +59,17 @@ describe MediaRenamer::Matchers::Anime do
           extension:         'mkv'
         )
       end
+
+      it "[ISS] Nanatsu no Taizai - The Seven Deadly Sins - 17 (TBS 1280x720 x264 AAC)[14247C29].mkv" do
+        filename = "[ISS] Nanatsu no Taizai - The Seven Deadly Sins - 17 (TBS 1280x720 x264 AAC)[14247C29].mkv"
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          translation_group: 'ISS',
+          title:             'Nanatsu no Taizai - The Seven Deadly Sins',
+          episode:           '17',
+          extension:         'mkv'
+        )
+      end
     end
 
     describe 'when filename is incorrect' do
