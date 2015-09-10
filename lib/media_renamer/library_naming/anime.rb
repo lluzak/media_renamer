@@ -13,7 +13,7 @@ class MediaRenamer::LibraryNaming::Anime
   private
 
   def  filename
-    "#{@metadata[:title]} 1#{@metadata[:episode]}.#{@metadata[:extension]}"
+    "#{@metadata[:title]} EP#{@metadata[:episode]}.#{@metadata[:extension]}"
   end
 
   def directory_path

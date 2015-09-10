@@ -15,7 +15,7 @@ describe MediaRenamer::LibraryNaming::Anime do
   describe '#store_path' do
 
     it 'returns filename' do
-      expect(subject.store_path[:filename]).to eq("Seirei Tsukai no Blade Dance 104.mkv")
+      expect(subject.store_path[:filename]).to eq("Seirei Tsukai no Blade Dance EP04.mkv")
     end
 
     it 'returns directory path' do
