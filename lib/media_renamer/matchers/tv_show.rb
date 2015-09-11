@@ -3,9 +3,9 @@ module MediaRenamer::Matchers
     # Defiance.S02E09.720p.HDTV.x264-IMMERSE.mkv
     FILENAME_REGEX = /
       ^(?<title>[A-z0-9 \.]+)
-      (?=S[0-9]{2}E[0-9]{2})
-      S(?<season>[0-9]{2})
-      E(?<episode>[0-9]{2})
+      (?=[sS][0-9]{2}[eE][0-9]{2})
+      [sS](?<season>[0-9]{2})
+      [eE](?<episode>[0-9]{2})
       .*
       (?<=\.)(?<extension>[A-z0-9]{2,4})$
     /x

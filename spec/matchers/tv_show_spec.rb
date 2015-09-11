@@ -49,6 +49,17 @@ describe MediaRenamer::Matchers::TvShow do
         )
       end
 
+      it 'longmire.s04e01.webrip.x264-2hd.mp4' do
+        filename = 'longmire.s04e01.webrip.x264-2hd.mp4'
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          title:     'Longmire',
+          season:    '04',
+          episode:   '01',
+          extension: 'mp4'
+        )
+      end
+
       it 'ray.donovan.309.hdtv-lol.mp4' do
         filename = 'ray.donovan.309.hdtv-lol.mp4'
 
@@ -58,7 +69,6 @@ describe MediaRenamer::Matchers::TvShow do
           episode:   '09',
           extension: 'mp4'
         )
-
       end
     end
 
