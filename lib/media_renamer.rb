@@ -1,5 +1,7 @@
 require 'media_renamer/version'
 
+require 'titleize'
+
 require 'media_renamer/errors'
 require 'media_renamer/matcher'
 require 'media_renamer/media_namer'

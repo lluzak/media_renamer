@@ -48,6 +48,18 @@ describe MediaRenamer::Matchers::TvShow do
           extension: 'mkv'
         )
       end
+
+      it 'ray.donovan.309.hdtv-lol.mp4' do
+        filename = 'ray.donovan.309.hdtv-lol.mp4'
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          title:     'Ray Donovan',
+          season:    '03',
+          episode:   '09',
+          extension: 'mp4'
+        )
+
+      end
     end
 
     describe "when filename doesn't match" do
