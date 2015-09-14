@@ -18,9 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(/^(test|spec|features)\//)
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rb-inotify", "~> 0.9"
+  spec.add_dependency "rb-inotify", "~> 0.9" if RUBY_PLATFORM =~ /linux/i
+  spec.add_dependency "rb-fsevent", "~> 0.9" if RUBY_PLATFORM =~ /darwin/i
+
   spec.add_dependency "titleize", "~> 1.3"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-end
+  end

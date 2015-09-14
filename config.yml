@@ -1,0 +1,7 @@
+watch_directory: '/Users/przemek/code/hobby/complete'
+library:
+  base_path: '/Users/przemek/code/hobby/moved'
+  directory_names:
+    anime: 'Animes'
+    tv_show: 'TV Shows'
+    movie: 'Movies'

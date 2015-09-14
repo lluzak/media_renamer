@@ -1,22 +1,21 @@
 # encoding: utf-8
 
-require 'rb-inotify'
-
 module MediaRenamer
   class Watcher
-    def initialize(configuration, notifier = INotify::Notifier.new)
+    def initialize(configuration, notifier = NotifierProxy.notifier)
       @configuration   = configuration
       @notifier        = notifier
     end
 
     def begin
       create_watch_directory unless Dir.exist?(@configuration.watch_directory)
-      @notifier.watch(@configuration.watch_directory, :recursive, :moved_to, :create) do |event|
-        detect_and_move_file(event.name) if File.file?(event.absolute_name)
+
+      @notifier.watch(@configuration.watch_directory) do |event|
+        check_files_in_watching_directory
       end
 
       logger.info("Starting watching directory...")
-      check_existing_files
+      check_files_in_watching_directory
       @notifier.run
     end
 
@@ -26,7 +25,7 @@ module MediaRenamer
       FileUtils.mkdir_p @configuration.watch_directory
     end
 
-    def check_existing_files
+    def check_files_in_watching_directory
       files_in_watching_directory.each do |file|
         detect_and_move_file(file)
       end
@@ -48,7 +47,7 @@ module MediaRenamer
         namer = MediaNamer.new(filename)
         namer.run
 
-        logger.info("#{filename}: File detected as #{media_type_name(namer.media_type)}")
+        logger.info("#{filename}: File detected as #{namer.media_type}")
         move_file_to_library(filepath, namer)
       rescue UnknownMediaTypeError
         logger.warn("#{filename}: Unable to determine media type of the file")
@@ -77,12 +76,5 @@ module MediaRenamer
       when :anime   then @configuration.library_anime_directory
       end
     end
-
-    def media_type_name(media_type)
-      media_type.to_s.
-        gsub('_', ' ').
-        gsub(/\b(?<!['â`])[a-z]/) { $&.capitalize }
-    end
-
   end
 end
