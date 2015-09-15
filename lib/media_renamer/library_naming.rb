@@ -1,6 +1,5 @@
 module MediaRenamer
   class LibraryNaming
-
     def initialize(media_type, metadata)
       @media_type = media_type
       @metadata   = metadata
@@ -17,6 +16,5 @@ module MediaRenamer
       when :tv_show then TvShow.new(@metadata)
       end
     end
-
   end
 end

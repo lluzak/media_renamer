@@ -12,7 +12,6 @@ describe MediaRenamer::Watcher do
   subject { described_class.new(configuration, notifier) }
 
   describe '#begin' do
-
     describe 'when files exists in directory' do
       before do
         expect(notifier).to receive(:watch).
@@ -21,7 +20,7 @@ describe MediaRenamer::Watcher do
         expect(notifier).to receive(:run)
 
         expect(Dir).to receive(:[]).
-          and_return(["filename.mp4", "filename2.avi"])
+          and_return([])
       end
 
 
@@ -36,6 +35,29 @@ describe MediaRenamer::Watcher do
 
           subject.begin
         end
+      end
+    end
+
+    describe 'when changes in watch directory detected' do
+      before do
+        expect(notifier).to receive(:watch).and_yield
+        expect(notifier).to receive(:run)
+
+        expect(Dir).to receive(:[]).
+          and_return([])
+
+        expect(Dir).to receive(:[]).
+          and_return(["tv_show.mkv", "directory/movie.mp4"])
+      end
+
+      it 'detects and moves new files' do
+        expect(MediaRenamer::MediaNamer).to receive(:new).
+          with("movie.mp4").and_call_original
+
+        expect(MediaRenamer::MediaNamer).to receive(:new).
+          with("tv_show.mkv").and_call_original
+
+        subject.begin
       end
     end
   end

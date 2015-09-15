@@ -10,7 +10,7 @@ module MediaRenamer
     def begin
       create_watch_directory unless Dir.exist?(@configuration.watch_directory)
 
-      @notifier.watch(@configuration.watch_directory) do |event|
+      @notifier.watch(@configuration.watch_directory) do
         check_files_in_watching_directory
       end
 
