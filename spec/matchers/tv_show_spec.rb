@@ -72,6 +72,13 @@ describe MediaRenamer::Matchers::TvShow do
       end
     end
 
+    describe 'when filename contains sample' do
+      it 'returns nil' do
+        filename = "ray.donovan.310.hdtv-lol.sample.mp4"
+        expect(subject.retrieve_information_from_filename(filename)).to be_nil
+      end
+    end
+
     describe "when filename doesn't match" do
       it 'returns nil' do
         filename = 'Defiance.E09.720p.HDTV.x264-IMMERSE.mkv'

@@ -22,6 +22,8 @@ module MediaRenamer::Matchers
     /x
 
     def retrieve_information_from_filename(filename)
+      return nil if sample_file?(filename)
+
       metadata = nil
       [FILENAME_REGEX, FILENAME_REGEX_NUMBERS].each do |regex|
         result = regex.match(filename)
@@ -35,6 +37,10 @@ module MediaRenamer::Matchers
     end
 
     private
+
+    def sample_file?(filename)
+      filename.match(/sample/i)
+    end
 
     def build_metadata(result)
       {
