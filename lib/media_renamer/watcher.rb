@@ -50,9 +50,9 @@ module MediaRenamer
         logger.info("#{filename}: File detected as #{namer.media_type}")
         move_file_to_library(filepath, namer)
       rescue UnknownMediaTypeError
-        logger.warn("#{filename}: Unable to determine media type of the file")
+        logger.debug("#{filename}: Unable to determine media type of the file")
       rescue SourceNotExistError
-        logger.warn("#{filename}: File no longer exist in watch directory")
+        logger.debug("#{filename}: File no longer exist in watch directory")
       end
     end
 
