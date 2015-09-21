@@ -77,7 +77,14 @@ describe MediaRenamer::Matchers::Movie do
       end
     end
 
-    describe "when filenames doesn't match" do
+    describe "When filename contains Sample word" do
+      it 'return nil' do
+        filename = "Now You See Me 2013 Extended 720p BRRip XviD AC3 - KINGDOM - Sample.avi"
+        expect(subject.retrieve_information_from_filename(filename)).to be_nil
+      end
+    end
+
+    describe "when filename doesn't match" do
       it 'returns nil' do
         filename = 'Saving Private Ryan.54.720p.BrRip.x264.YIFY.mp4'
         expect(subject.retrieve_information_from_filename(filename)).to be_nil

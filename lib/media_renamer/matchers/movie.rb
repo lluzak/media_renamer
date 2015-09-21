@@ -9,11 +9,17 @@ module MediaRenamer::Matchers
     /x
 
     def retrieve_information_from_filename(filename)
+      return nil if sample_file?(filename)
+
       result = filename.match(FILENAME_REGEX)
       result && build_metadata(result)
     end
 
     private
+
+    def sample_file?(filename)
+      filename.match(/sample/i)
+    end
 
     def build_metadata(result)
       {
