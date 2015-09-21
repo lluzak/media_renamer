@@ -3,7 +3,7 @@ require 'rb-inotify'
 module MediaRenamer::Notifiers
   class INotify
     def initialize
-      @inotify = INotify::Notifier.new
+      @inotify = ::INotify::Notifier.new
     end
 
     def watch(directory, &block)

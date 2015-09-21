@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MediaRenamer::Watcher do
   let(:config_path)   { File.expand_path('fixtures/config.yml', File.dirname(__FILE__)) }
   let(:configuration) { MediaRenamer::Configuration.new(config_path) }
-  let(:notifier)      { double("Notifier", watch: true) }
+  let(:notifier)      { double("Notifier", watch: true, run: true) }
 
   before do
     configuration.read!
@@ -59,6 +59,23 @@ describe MediaRenamer::Watcher do
 
         subject.begin
       end
+    end
+  end
+
+  describe 'when notify detect change in watched directory' do
+    let(:found_files) do
+      ['example/test.mp4', 'example-2024/movie.mp4']
+    end
+
+    before do
+      expect(Dir).to receive(:[]).
+        with(File.join(configuration.watch_directory, "**/*.*")).
+        and_return(found_files)
+    end
+
+    it 'runs detection on found files' do
+      expect(MediaRenamer::MediaNamer).to receive(:new).twice.and_call_original
+      subject.begin
     end
   end
 end
