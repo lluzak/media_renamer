@@ -30,7 +30,7 @@ module MediaRenamer::Matchers
     end
 
     def titleize(text)
-      text.gsub(".", " ").strip
+      text.tr(".", " ").strip
     end
   end
 end

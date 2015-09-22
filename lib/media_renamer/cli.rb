@@ -8,9 +8,8 @@ module MediaRenamer
     end
 
     def run
-      options             = OpenStruct.new
-      options.config_path = nil
-      opt_parser          = build_parser(options)
+      options    = OpenStruct.new(config_path: nil)
+      opt_parser = build_parser(options)
 
       begin
         opt_parser.parse!(@args)
@@ -19,9 +18,7 @@ module MediaRenamer
           exit
         end
 
-        configuration = Configuration.new(options.config_path)
-        configuration.read!
-
+        configuration = read_configuration!
         Watcher.new(configuration).begin
       rescue OptionParser::InvalidOption, OptionParser::MissingArgument
         puts $ERROR_INFO.to_s
@@ -31,6 +28,13 @@ module MediaRenamer
     end
 
     private
+
+    def read_configuration!
+      configuration = Configuration.new(options.config_path)
+      configuration.read!
+
+      configuration
+    end
 
     def build_parser(options)
       OptionParser.new do |opts|

@@ -52,7 +52,7 @@ module MediaRenamer::Matchers
     end
 
     def cleanup_and_titleize(text)
-      cleaned = text.gsub(".", " ").strip
+      cleaned = text.tr(".", " ").strip
       cleaned.titleize
     end
 

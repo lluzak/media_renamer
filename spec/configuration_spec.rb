@@ -39,7 +39,7 @@ describe MediaRenamer::Configuration do
 
         it 'raise ConfigFileError' do
           expect { subject.read! }.to raise_error(MediaRenamer::ConfigFileError).
-            with_message(/fixtures\/malformed_config.yml contains malformed content/)
+            with_message(%r{fixtures\/malformed_config.yml contains malformed content})
         end
       end
 
@@ -48,7 +48,7 @@ describe MediaRenamer::Configuration do
 
         it 'raise ConfigFileError' do
           expect { subject.read! }.to raise_error(MediaRenamer::ConfigFileError).
-            with_message(/fixtures\/incomplete_config.yml is missing base_path or watch_directory/)
+            with_message(%r{fixtures\/incomplete_config.yml is missing base_path or watch_directory})
         end
       end
     end
@@ -58,7 +58,7 @@ describe MediaRenamer::Configuration do
 
       it 'raise ConfigFileError' do
         expect { subject.read! }.to raise_error(MediaRenamer::ConfigFileError).
-          with_message(/fixtures\/non_exist.yml not found/)
+          with_message(%r{fixtures\/non_exist.yml not found})
       end
     end
   end

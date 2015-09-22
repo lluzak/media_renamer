@@ -17,7 +17,7 @@ class MediaRenamer::LibraryNaming::TvShow
   end
 
   def directory_path
-    season_directory = "Season %d" % @metadata[:season]
+    season_directory = "Season #{@metadata[:season].to_i}"
     [@metadata[:title], season_directory].join('/')
   end
 end

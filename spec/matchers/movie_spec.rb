@@ -47,7 +47,7 @@ describe MediaRenamer::Matchers::Movie do
       end
 
       it 'Godzilla.2012.720p.WEBRiP.XviD-VAiN.avi' do
-        filename =  'Godzilla.2012.720p.WEBRiP.XviD-VAiN.avi'
+        filename = 'Godzilla.2012.720p.WEBRiP.XviD-VAiN.avi'
 
         expect(subject.retrieve_information_from_filename(filename)).to eql(
           title:        'Godzilla',

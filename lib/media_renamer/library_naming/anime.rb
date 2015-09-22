@@ -12,7 +12,7 @@ class MediaRenamer::LibraryNaming::Anime
 
   private
 
-  def  filename
+  def filename
     "#{@metadata[:title]} EP#{@metadata[:episode]}.#{@metadata[:extension]}"
   end
 

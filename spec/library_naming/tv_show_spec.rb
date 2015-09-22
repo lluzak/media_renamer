@@ -13,7 +13,6 @@ describe MediaRenamer::LibraryNaming::TvShow do
   subject { described_class.new(metadata) }
 
   describe '#store_path' do
-
     it 'returns filename' do
       expect(subject.store_path[:filename]).to eq("The Knick - 1x09.mp4")
     end
@@ -29,6 +28,16 @@ describe MediaRenamer::LibraryNaming::TvShow do
 
       it 'includes season directory' do
         expect(subject.store_path[:path]).to include("Season 1")
+      end
+    end
+
+    describe 'when season number is 09' do
+      before do
+        metadata[:season] = '09'
+      end
+
+      it 'returns proper path without octal number interpolation' do
+        expect(subject.store_path[:path]).to eq("The Knick/Season 9")
       end
     end
   end

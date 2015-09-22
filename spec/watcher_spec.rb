@@ -23,7 +23,6 @@ describe MediaRenamer::Watcher do
           and_return([])
       end
 
-
       it 'runs detection on files in directory' do
         subject.begin
       end
