@@ -18,7 +18,7 @@ module MediaRenamer
           exit
         end
 
-        configuration = read_configuration!
+        configuration = read_configuration!(config_path)
         Watcher.new(configuration).begin
       rescue OptionParser::InvalidOption, OptionParser::MissingArgument
         puts $ERROR_INFO.to_s
@@ -29,8 +29,8 @@ module MediaRenamer
 
     private
 
-    def read_configuration!
-      configuration = Configuration.new(options.config_path)
+    def read_configuration!(config_path)
+      configuration = Configuration.new(config_path)
       configuration.read!
 
       configuration
