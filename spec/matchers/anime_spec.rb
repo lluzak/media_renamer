@@ -60,6 +60,18 @@ describe MediaRenamer::Matchers::Anime do
         )
       end
 
+      it '[NoobSubs] Mahouka Koukou no Rettousei 23 (720p Blu-ray 8bit AAC).mp4' do
+        filename = "[NoobSubs] Mahouka Koukou no Rettousei 23 (720p Blu-ray 8bit AAC).mp4"
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          translation_group: 'NoobSubs',
+          title:             'Mahouka Koukou no Rettousei',
+          episode:           '23',
+          extension:         'mp4'
+        )
+
+      end
+
       it "[ISS] Nanatsu no Taizai - The Seven Deadly Sins - 17 (TBS 1280x720 x264 AAC)[14247C29].mkv" do
         filename = "[ISS] Nanatsu no Taizai - The Seven Deadly Sins - 17 (TBS 1280x720 x264 AAC)[14247C29].mkv"
 
