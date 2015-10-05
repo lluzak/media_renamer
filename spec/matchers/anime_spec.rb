@@ -82,6 +82,17 @@ describe MediaRenamer::Matchers::Anime do
           extension:         'mkv'
         )
       end
+
+      it "[HorribleSubs] Haikyuu!! S2 - 01 [720p].mkv" do
+        filename = "[HorribleSubs] Haikyuu!! S2 - 01 [720p].mkv"
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          translation_group: 'HorribleSubs',
+          title:             'Haikyuu!! S2',
+          episode:           '01',
+          extension:         'mkv'
+        )
+      end
     end
 
     describe 'when filename is incorrect' do
