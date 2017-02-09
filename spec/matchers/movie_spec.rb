@@ -89,6 +89,12 @@ describe MediaRenamer::Matchers::Movie do
         filename = 'Saving Private Ryan.54.720p.BrRip.x264.YIFY.mp4'
         expect(subject.retrieve_information_from_filename(filename)).to be_nil
       end
+
+      it 'returns nil' do
+        filename = "[HorribleSubs] Mobile Suit Gundam - Iron-Blooded Orphans - 03 [1080p].mkv"
+
+        expect(subject.retrieve_information_from_filename(filename)).to be_nil
+      end
     end
   end
 end

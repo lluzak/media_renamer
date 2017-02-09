@@ -93,6 +93,18 @@ describe MediaRenamer::Matchers::Anime do
           extension:         'mkv'
         )
       end
+
+      it '[HorribleSubs] Mobile Suit Gundam - Iron-Blooded Orphans - 03 [1080p].mkv' do
+        filename = "[HorribleSubs] Mobile Suit Gundam - Iron-Blooded Orphans - 03 [1080p].mkv"
+
+        expect(subject.retrieve_information_from_filename(filename)).to eql(
+          translation_group: 'HorribleSubs',
+          title:             'Mobile Suit Gundam - Iron-Blooded Orphans',
+          episode:           '03',
+          extension:         'mkv'
+        )
+
+      end
     end
 
     describe 'when filename is incorrect' do

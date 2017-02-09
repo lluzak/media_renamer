@@ -1,7 +1,7 @@
 module MediaRenamer::Matchers
   class Movie
     FILENAME_REGEX = /
-      ^(?<title>[A-z0-9 \.-]+?)
+      ^(?<title>[^\[\]][A-z0-9 \.-]+?)
       (?=(?:\(|)(?:[0-9]{4})(?:\)|))
       (\(|)(?<year>[0-9]{4})
       .*
