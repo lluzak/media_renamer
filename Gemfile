@@ -12,5 +12,4 @@ group :test do
   gem 'rspec-mocks'
   gem 'bogus'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: nil
 end
